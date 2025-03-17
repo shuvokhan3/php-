@@ -1,0 +1,2 @@
+<?php
+rn $this->title;
