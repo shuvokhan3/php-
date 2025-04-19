@@ -1,42 +1,36 @@
 <?php
-class Song {
-    public $songId;
-    public $songName;
-}
-//instanciate object
-$song1 = new Song();
-$song1 -> songId = 3301;
-$song1 -> songName= "purnota";
 
-//instanciate object
-$song2 = new Song();
-$song2 -> songId = 4401;
-$song2 -> songName = "river flow on you!";
+class Song{
+    public $name;
+    public $id;
+    public function __construct($name, $id){
+        $this->name = $name;
+        $this->id   = $id;
+    }
 
-//instanciate object
-$song3 = new Song();
-$song3 -> songId = 4401;
-$song3 -> songName = "november rain";
-
-
-
-class Playlist {
-    public $PlaylistName = [];
-    public $songName = [];
-
-    public function addSong($name , $song){
-        $this->PlaylistName[] = $name;
-        $this->songName[] = $song;
-        
+    public function SongName(){
+        return $this->name. $this->id;
+    }
+    //here this singerName() method is static so it can not possible to overridding this method on the child class
+    static public function singerName(){
+        return "Atif";
     }
 }
-//object instenciate:
-$warfaze = new Playlist();
-$warfaze -> addSong($song1,"rock");
-// print_r($warfaze);
 
-//object instanciate:
-$classicalSong = new Playlist();
-$classicalSong -> addSong("Classic",$song2);
-$classicalSong -> addSong("rock",$song3);
-print_r($classicalSong);
+class playList extends song{
+    public $playListName;
+    public function __construct($playListName,$name, $id){
+        parent::__construct($name, $id);//here i assign the value of the parent class property
+        $this->playListName = $playListName;
+    }
+
+    public function playListInfo(){
+        return "Playlist name is : ".$this->playListName. "Song and song id is : ".$this->name.$this->id;
+    }
+
+}
+
+$favList = new playList("hard rock","Shuvvooo",101);
+
+echo $favList->singerName();
+
